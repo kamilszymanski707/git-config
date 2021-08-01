@@ -45,6 +45,10 @@ spring:
           filters:
             - RewritePath=${route-prefix}catalog${path-regex}, ${rewrited-path-regex}
             - RemoveRequestHeader=Cookie
+            - name: CircuitBreaker
+              args:
+                name: defaultcircuitbreaker
+                fallbackUri: forward:${route-prefix}fallback
         - id: discount
           uri: lb://discount/
           predicates:
@@ -52,6 +56,10 @@ spring:
           filters:
             - RewritePath=${route-prefix}discount${path-regex}, ${rewrited-path-regex}
             - RemoveRequestHeader=Cookie
+            - name: CircuitBreaker
+              args:
+                name: defaultcircuitbreaker
+                fallbackUri: forward:${route-prefix}fallback
         - id: basket
           uri: lb://basket/
           predicates:
@@ -59,3 +67,7 @@ spring:
           filters:
             - RewritePath=${route-prefix}basket${path-regex}, ${rewrited-path-regex}
             - RemoveRequestHeader=Cookie
+            - name: CircuitBreaker
+              args:
+                name: defaultcircuitbreaker
+                fallbackUri: forward:${route-prefix}fallback
