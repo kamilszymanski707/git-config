@@ -1,4 +1,3 @@
-base-local-url: http://127.0.0.1
 route-prefix: /e-shop/api/v1/
 path-regex: /(?<path>.*)
 rewrited-path-regex: /$\{path}
@@ -60,8 +59,3 @@ spring:
           filters:
             - RewritePath=${route-prefix}basket${path-regex}, ${rewrited-path-regex}
             - RemoveRequestHeader=Cookie
-
-eureka:
-  client:
-    service-url:
-      default-zone: ${base-local-url}:8761/eureka/
