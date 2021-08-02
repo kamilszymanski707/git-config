@@ -25,7 +25,7 @@ spring:
             provider: keycloak
             client-id: e-shop
             scope: openid
-            client-secret: 1e8b086c-1399-47c0-bd6b-10f0dc13cee0
+            client-secret: ea859145-c891-409b-8f30-76e1af18685e
             authorization-grant-type: password
   cloud:
     gateway:
