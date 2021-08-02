@@ -1,0 +1,6 @@
+spring:
+  redis:
+    password: LuBeSxG73CtAJhPD
+    database: 0
+    port: 6379
+    host: redis_basket

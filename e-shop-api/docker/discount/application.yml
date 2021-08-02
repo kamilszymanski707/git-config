@@ -1,0 +1,7 @@
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    username: prod
+    password: bjYZGWPWbe2DPrFr
+    url: jdbc:postgresql://postgres_discount:5432/discount_db
