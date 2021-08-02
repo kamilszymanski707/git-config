@@ -4,6 +4,8 @@ keycloak-issuer-uri: http://localhost:8080/auth/realms/e-shop
 
 spring:
   rabbitmq:
+    port: 5672
+    host: ${base-local-host}
     username: prod
     password: 3kWr7WvWBpsJVztS
   security:
