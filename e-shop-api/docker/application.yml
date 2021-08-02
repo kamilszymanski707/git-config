@@ -1,6 +1,6 @@
 base-local-host: host.docker.internal
 base-local-url: http://${base-local-host}
-keycloak-issuer-uri: http://keycloak:8080/auth/realms/e-shop
+keycloak-issuer-uri: ${base-local-url}:8080/auth/realms/e-shop
 
 spring:
   rabbitmq:
