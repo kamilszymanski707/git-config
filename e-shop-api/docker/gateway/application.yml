@@ -22,9 +22,6 @@ spring:
             authorization-grant-type: password
   cloud:
     gateway:
-      httpclient:
-        ssl:
-          use-insecure-trust-manager: true
       default-filters:
         - TokenRelay
       discovery:
