@@ -3,13 +3,6 @@ path-regex: /(?<path>.*)
 rewrited-path-regex: /$\{path}
 keycloak-token-openid-uri: http://keycloak:8080/auth/realms/e-shop/protocol/openid-connect/
 
-server:
-  ssl:
-    key-alias: gateway
-    key-store-password: zP6VS8tn8tP8qAHM
-    key-store: classpath:gateway-cert.p12
-    key-store-type: PKCS12
-
 spring:
   security:
     oauth2:
