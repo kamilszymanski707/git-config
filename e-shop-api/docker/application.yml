@@ -3,7 +3,7 @@ keycloak-issuer-uri: http://host.docker.internal:8080/auth/realms/e-shop
 spring:
   rabbitmq:
     port: 5672
-    host: rabbitmq
+    host: host.docker.internal
     username: prod
     password: 3kWr7WvWBpsJVztS
   security:
