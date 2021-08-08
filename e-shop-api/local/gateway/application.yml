@@ -61,8 +61,3 @@ spring:
               args:
                 name: defaultcircuitbreaker
                 fallbackUri: forward:${route-prefix}fallback
-
-logging:
-  logstash:
-    enabled: true
-    url: 127.0.0.1:5000
