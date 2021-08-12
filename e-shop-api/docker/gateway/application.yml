@@ -1,0 +1,63 @@
+route-prefix: /e-shop/api/v1/
+path-regex: /(?<path>.*)
+rewrited-path-regex: /$\{path}
+keycloak-token-openid-uri: http://keycloak:8080/auth/realms/e-shop/protocol/openid-connect/
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            token-uri: ${keycloak-token-openid-uri}token
+            authorization-uri: ${keycloak-token-openid-uri}auth
+            userinfo-uri: ${keycloak-token-openid-uri}userinfo
+            user-name-attribute: preferred_username
+        registration:
+          e-shop:
+            provider: keycloak
+            client-id: e-shop
+            scope: openid
+            client-secret: 85e21861-5ff4-4be6-bcdd-94d354fa8d23
+            authorization-grant-type: password
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: catalog
+          uri: lb://catalog/
+          predicates:
+            - Path=${route-prefix}catalog/**
+          filters:
+            - RewritePath=${route-prefix}catalog${path-regex}, ${rewrited-path-regex}
+            - RemoveRequestHeader=Cookie
+            - name: CircuitBreaker
+              args:
+                name: defaultcircuitbreaker
+                fallbackUri: forward:${route-prefix}fallback
+        - id: discount
+          uri: lb://discount/
+          predicates:
+            - Path=${route-prefix}discount/**
+          filters:
+            - RewritePath=${route-prefix}discount${path-regex}, ${rewrited-path-regex}
+            - RemoveRequestHeader=Cookie
+            - name: CircuitBreaker
+              args:
+                name: defaultcircuitbreaker
+                fallbackUri: forward:${route-prefix}fallback
+        - id: basket
+          uri: lb://basket/
+          predicates:
+            - Path=${route-prefix}basket/**
+          filters:
+            - RewritePath=${route-prefix}basket${path-regex}, ${rewrited-path-regex}
+            - RemoveRequestHeader=Cookie
+            - name: CircuitBreaker
+              args:
+                name: defaultcircuitbreaker
+                fallbackUri: forward:${route-prefix}fallback
