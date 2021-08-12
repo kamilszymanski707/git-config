@@ -1,4 +1,4 @@
-keycloak-issuer-uri: http://keycloak:8080/auth/realms/e-shop
+keycloak-issuer-uri: http://localhost:8080/auth/realms/e-shop
 
 spring:
   rabbitmq:
