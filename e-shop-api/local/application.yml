@@ -22,6 +22,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${base-local-url}:8761/eureka/
-
-logstash.host: 127.0.0.1
-logstash.port: 5000
