@@ -1,0 +1,41 @@
+route-prefix: /tribalwars-clone/api/v1/
+path-regex: /(?<path>.*)
+rewrited-path-regex: /$\{path}
+keycloak-token-openid-uri: ${base-local-url}:8080/auth/realms/tribalwars-clone/protocol/openid-connect/
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            token-uri: ${keycloak-token-openid-uri}token
+            authorization-uri: ${keycloak-token-openid-uri}auth
+            userinfo-uri: ${keycloak-token-openid-uri}userinfo
+            user-name-attribute: preferred_username
+        registration:
+          tribalwars-clone:
+            provider: keycloak
+            client-id: tribalwars-clone
+            scope: openid
+            client-secret: 96c19c0e-d4c4-46a7-a172-cfe77dbddf0d
+            authorization-grant-type: password
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: material
+          uri: lb://material/
+          predicates:
+            - Path=${route-prefix}material/**
+          filters:
+            - RewritePath=${route-prefix}material{path-regex}, ${rewrited-path-regex}
+            - RemoveRequestHeader=Cookie
+            - name: CircuitBreaker
+              args:
+                name: defaultcircuitbreaker
+                fallbackUri: forward:${route-prefix}fallback

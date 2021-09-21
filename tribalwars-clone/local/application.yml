@@ -1,0 +1,15 @@
+base-local-host: 127.0.0.1
+base-local-url: http://${base-local-host}
+keycloak-issuer-uri: http://localhost:8080/auth/realms/tribalwars-clone
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${keycloak-issuer-uri}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${base-local-url}:8761/eureka/

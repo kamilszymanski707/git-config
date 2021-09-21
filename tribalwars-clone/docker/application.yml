@@ -1,0 +1,13 @@
+keycloak-issuer-uri: http://keycloak:8080/auth/realms/tribalwars-clone
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${keycloak-issuer-uri}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
