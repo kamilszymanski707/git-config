@@ -33,7 +33,7 @@ spring:
           predicates:
             - Path=${route-prefix}material/**
           filters:
-            - RewritePath=${route-prefix}material{path-regex}, ${rewrited-path-regex}
+            - RewritePath=${route-prefix}material${path-regex}, ${rewrited-path-regex}
             - RemoveRequestHeader=Cookie
             - name: CircuitBreaker
               args:
